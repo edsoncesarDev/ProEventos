@@ -1,4 +1,5 @@
-﻿namespace ProEventosAPI.Models
+﻿
+namespace ProEventosAPI.Models
 {
     public class Evento
     {
