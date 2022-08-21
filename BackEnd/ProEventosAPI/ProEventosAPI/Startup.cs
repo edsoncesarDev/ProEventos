@@ -30,6 +30,7 @@ namespace ProEventosAPI
         {
             services.AddDbContext<DataContext>(context => context.UseSqlServer(Configuration.GetConnectionString("Connection")));
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProEventosAPI", Version = "v1" });
@@ -51,6 +52,11 @@ namespace ProEventosAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(cors => cors.AllowAnyHeader()
+                                    .AllowAnyMethod()
+                                    .AllowAnyOrigin()
+            );
 
             app.UseEndpoints(endpoints =>
             {
