@@ -26,7 +26,6 @@ namespace ProEventosAPI.Controllers
             return _dataContext.Eventos;
         }
 
-
         [HttpGet("{id}")]
         public Evento GetById(int id)
         {

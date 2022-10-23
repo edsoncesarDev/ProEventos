@@ -19,7 +19,7 @@ import { PalestrantesComponent } from './palestrantes/palestrantes.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, //importando HttpClientModule
-    BrowserAnimationsModule //importando BrowserAnimationsModule
+    BrowserAnimationsModule //importando BrowserAnimationsModule para o funcionamento do ngxBootstrap
   ],
   providers: [],
   bootstrap: [AppComponent]
