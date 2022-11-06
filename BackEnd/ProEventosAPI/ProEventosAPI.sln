@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProEventosAPI", "ProEventosAPI\ProEventosAPI.csproj", "{9F9A1BAA-7DB1-4934-B677-E45C823F4CF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProEventosAPI", "ProEventosAPI\ProEventosAPI.csproj", "{9F9A1BAA-7DB1-4934-B677-E45C823F4CF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProEventos.Persistence", "ProEventos.Persistence\ProEventos.Persistence.csproj", "{4B874AD1-B876-4B1C-8CB2-D74EEF2189D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProEventos.Domain", "ProEventos.Domain\ProEventos.Domain.csproj", "{EAC3711E-7AFC-4AC9-AA6D-C48676187D00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProEventos.Application", "ProEventos.Application\ProEventos.Application.csproj", "{A1CF93BE-3CE9-4774-B065-FC4B73D08361}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{9F9A1BAA-7DB1-4934-B677-E45C823F4CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F9A1BAA-7DB1-4934-B677-E45C823F4CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F9A1BAA-7DB1-4934-B677-E45C823F4CF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B874AD1-B876-4B1C-8CB2-D74EEF2189D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B874AD1-B876-4B1C-8CB2-D74EEF2189D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B874AD1-B876-4B1C-8CB2-D74EEF2189D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B874AD1-B876-4B1C-8CB2-D74EEF2189D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAC3711E-7AFC-4AC9-AA6D-C48676187D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAC3711E-7AFC-4AC9-AA6D-C48676187D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAC3711E-7AFC-4AC9-AA6D-C48676187D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAC3711E-7AFC-4AC9-AA6D-C48676187D00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1CF93BE-3CE9-4774-B065-FC4B73D08361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1CF93BE-3CE9-4774-B065-FC4B73D08361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1CF93BE-3CE9-4774-B065-FC4B73D08361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1CF93BE-3CE9-4774-B065-FC4B73D08361}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
