@@ -71,11 +71,13 @@ export class EventoListaComponent implements OnInit {
 
   }
 
-  public openModal(template: TemplateRef<any>): void{
+  public openModal(event: any, template: TemplateRef<any>): void{
+    event.stopPropagation();
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'})
   }
 
   public confirm(): void {
+    debugger
     this.modalRef.hide();
     this.toastr.success('Evento deletado com sucesso.', 'Deletado!');
   }

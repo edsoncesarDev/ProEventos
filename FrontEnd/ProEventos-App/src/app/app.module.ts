@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; //importando
 import { HttpClientModule } from '@angular/common/http'; //importando
-import { FormsModule } from '@angular/forms'; //importando
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; //importando
 
 import { CollapseModule } from 'ngx-bootstrap/collapse'; //importado
 import { TooltipModule } from 'ngx-bootstrap/tooltip'; //importado
@@ -59,6 +59,7 @@ import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
     HttpClientModule, //importando para fazer requisições no backEnd
     BrowserAnimationsModule, //importando para o funcionamento do ngxBootstrap
     FormsModule, //importado para utilizar Two-way Data Binding
+    ReactiveFormsModule, //importando para realizar as validações dos inputs
     CollapseModule.forRoot(), //importado para utilizar Toggle collapse no component nav
     TooltipModule.forRoot(), //importado para utilizar TooltipModule
     BsDropdownModule.forRoot(), //importado para utilizar BsDropdownModule - forRoot caso precise passar algum parâmetro
