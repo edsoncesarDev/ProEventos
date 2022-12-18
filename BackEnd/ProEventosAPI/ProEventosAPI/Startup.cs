@@ -10,6 +10,7 @@ using ProEventos.Application.RepositoryApplication;
 using ProEventos.Persistence.Context;
 using ProEventos.Persistence.IRepository;
 using ProEventos.Persistence.Repository;
+using System;
 
 namespace ProEventosAPI
 {
@@ -28,6 +29,9 @@ namespace ProEventosAPI
             services.AddDbContext<ProEventosContext>(context => context.UseSqlServer(Configuration.GetConnectionString("Connection")));
             services.AddControllers()
                 .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddScoped<IEventoService, EventoService>();
             services.AddScoped<IGeralPersist, GeralPersist>();
             services.AddScoped<IEventoPersist, EventoPersist>();

@@ -1,16 +1,16 @@
-﻿using ProEventos.Domain;
+﻿using ProEventos.Application.Dtos;
 using System.Threading.Tasks;
 
 namespace ProEventos.Application.IRepositoryApplication
 {
     public interface IEventoService
     {
-        Task<Evento> AddEvento(Evento model);
-        Task<Evento> UpdateEvento(int eventoId, Evento evento);
+        Task<EventoDto> AddEvento(EventoDto model);
+        Task<EventoDto> UpdateEvento(int eventoId, EventoDto evento);
         Task<bool> DeleteEvento(int eventoId);
 
-        Task<Evento[]> GetAllEventosAsync(bool includePalestrantes = false);
-        Task<Evento[]> GetAllEventosByTemaAsync(string tema, bool includePalestrantes = false);
-        Task<Evento> GetEventoByIdAsync(int eventoId, bool includePalestrantes = false);
+        Task<EventoDto[]> GetAllEventosAsync(bool includePalestrantes = false);
+        Task<EventoDto[]> GetAllEventosByTemaAsync(string tema, bool includePalestrantes = false);
+        Task<EventoDto> GetEventoByIdAsync(int eventoId, bool includePalestrantes = false);
     }
 }
