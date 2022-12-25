@@ -11,6 +11,10 @@ import { ModalModule } from 'ngx-bootstrap/modal'; //importado
 import { ToastrModule } from 'ngx-toastr'; //importado
 import { NgxSpinnerModule } from "ngx-spinner"; //importado
 
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'; //importado
+import { defineLocale } from 'ngx-bootstrap/chronos'; //importado
+import { ptBrLocale } from 'ngx-bootstrap/locale'; //importado
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContatosComponent } from './componentes/contatos/contatos.component';
@@ -32,6 +36,7 @@ import { EventoService } from './services/evento.service';
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 
 
+defineLocale('pt-br', ptBrLocale); //importado - definindo datePicker como BR
 
 
 @NgModule({
@@ -64,6 +69,7 @@ import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
     TooltipModule.forRoot(), //importado para utilizar TooltipModule
     BsDropdownModule.forRoot(), //importado para utilizar BsDropdownModule - forRoot caso precise passar algum parâmetro
     ModalModule.forRoot(), //importado para utilizar ModalModule
+    BsDatepickerModule.forRoot(), //importado para funcionalidades de datas
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
