@@ -31,9 +31,11 @@ import { LoginComponent } from './componentes/user/login/login.component';
 import { RegistrationComponent } from './componentes/user/registration/registration.component';
 
 import { EventoService } from './services/evento.service';
+import { LoteService } from './services/lote.service';
 
  //importado
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
+
 
 
 defineLocale('pt-br', ptBrLocale); //importado - definindo datePicker como BR
@@ -78,7 +80,10 @@ defineLocale('pt-br', ptBrLocale); //importado - definindo datePicker como BR
     }), //importado para mostrar alertas em nossos componentes
     NgxSpinnerModule,
   ],
-  providers: [EventoService],
+  providers: [
+    EventoService,
+    LoteService
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

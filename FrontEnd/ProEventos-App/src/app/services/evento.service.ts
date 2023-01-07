@@ -7,7 +7,7 @@ import { Evento } from '../models/Evento';
   //{ providedIn: 'root' } //adicionado no app.module.ts
 )
 export class EventoService {
-  baseURL = 'https://localhost:44337/api/Eventos';
+  public baseURL: string = 'https://localhost:44337/api/Eventos';
 
   constructor(private http: HttpClient) { }
 

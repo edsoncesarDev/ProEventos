@@ -1,3 +1,6 @@
+
+<!-- Evento -->
+
 <div class="card rounded shadow-sm">
   <form [formGroup]="form">
     <div class="p-3">
@@ -10,8 +13,9 @@
       <div class="form-row">
         <div class="form-group col-md-12">
           <label>Tema</label>
-          <input type="text" class="form-control" [ngClass]="cssValidator(f.tema)"
-          formControlName="tema" placeholder="Insira o Tema">
+          <input
+          [ngClass]="cssValidator(f.tema)"
+          type="text" class="form-control" formControlName="tema" placeholder="Insira o Tema">
           <div *ngIf="f.tema.errors?.required" class="invalid-feedback">
             Tema é obrigatório.
           </div>
@@ -26,20 +30,20 @@
       <div class="form-row">
         <div class="form-group col-md-8">
           <label>Local</label>
-          <input type="text" class="form-control"
+          <input
           [ngClass]="cssValidator(f.local)"
-          formControlName="local" placeholder="">
+          type="text" class="form-control" formControlName="local" placeholder="">
           <div class="invalid-feedback">
             Local é obrigatório.
           </div>
         </div>
         <div class="form-group col-md-4">
           <label>Data e Hora</label>
-          <input type="datetime" class="form-control"
+          <input
           [ngClass]="cssValidator(f.dataEvento)"
+          type="datetime" class="form-control" formControlName="dataEvento" placeholder=""
           bsDatepicker
-          [bsConfig]="bsconfigDate"
-          formControlName="dataEvento" placeholder="">
+          [bsConfig]="bsconfigDate">
           <div class="invalid-feedback">
             Data e Hora é obrigatório.
           </div>
@@ -48,9 +52,9 @@
       <div class="form-row">
         <div class="form-group col-md-2">
           <label>Qtd Pessoas</label>
-          <input type="number" class="form-control"
+          <input
           [ngClass]="cssValidator(f.qtdPessoas)"
-          formControlName="qtdPessoas" placeholder="">
+          type="number" class="form-control" formControlName="qtdPessoas" placeholder="">
           <div *ngIf="f.qtdPessoas.errors?.required && f.qtdPessoas.touched" class="invalid-feedback">
             Qtd Pessoas é obrigatório.
           </div>
@@ -60,18 +64,18 @@
         </div>
         <div class="form-group col-md-2">
           <label>Telefone</label>
-          <input type="number" class="form-control"
+          <input
           [ngClass]="cssValidator(f.telefone)"
-          formControlName="telefone" placeholder="(000) 90000-0000">
+          type="number" class="form-control" formControlName="telefone" placeholder="(000) 90000-0000">
           <div class="invalid-feedback">
             Telefone é obrigatório.
           </div>
         </div>
         <div class="form-group col-md-4">
           <label>e-mail</label>
-          <input type="text" class="form-control"
+          <input
           [ngClass]="cssValidator(f.email)"
-          formControlName="email" placeholder="e-mail">
+          type="text" class="form-control" formControlName="email" placeholder="e-mail">
           <div *ngIf="f.email.errors?.required && f.email.touched" class="invalid-feedback">
             e-mail é obrigatório.
           </div>
@@ -81,9 +85,9 @@
         </div>
         <div class="form-group col-md-4">
           <label>Imagem</label>
-          <input type="text" class="form-control"
+          <input
           [ngClass]="cssValidator(f.imagemURL)"
-          formControlName="imagemURL" placeholder="imagem">
+          type="text" class="form-control" formControlName="imagemURL" placeholder="imagem">
           <div class="invalid-feedback">
             Imagem é obrigatório.
           </div>
@@ -95,7 +99,7 @@
         <button class="btn btn-outline-secondary mr-auto border" (click)="resetForm()">
           Cancelar Alteração
         </button>
-        <button class="btn btn-success" [disabled]="!form.valid" (click)="salvarAlteracao()">
+        <button class="btn btn-success" [disabled]="!form.valid" (click)="salvarEvento()">
           <!-- <span class="spinner-border spinner-border-sm mr-1"></span> -->
           Salvar Evento
         </button>
@@ -103,3 +107,106 @@
     </div>
   </form>
 </div>
+
+<!-- Lotes -->
+
+<div class="card rounded shadow-sm mt-4" *ngIf="modoEditar">
+  <!-- <p>Form value: {{form.controls['lotes'].value | json}}</p>
+  <p>Form valid: {{form.controls['lotes'].status | json}}</p> -->
+  <div class="p-3">
+    <div class="d-flex border-bottom">
+      <h2 class="mr-auto">
+        Lotes do Evento
+      </h2>
+      <h2>
+        <i class="fas fa-money-bill-wave"></i>
+      </h2>
+    </div>
+    <p>Clique em Lote para adicionar e preencher novos Lotes</p>
+    <div class="form-row p-1">
+      <div [formGroup]="form" class="col">
+        <div formArrayName="lotes" *ngFor="let lote of lotes.controls; let i = index">
+          <fieldset [formGroupName]="i" class="form-group">
+            <legend class="d-flex justify-content-between capitalize">
+              {{ retornaTituloLote(lotes.get(i+'.nome').value) }}
+              <button class="p-2 btn btn-sm btn-outline-warning mb-1 d-flex" (click)="removerLote(template, i)"
+                tooltip="Excluir Lote"
+                [adaptivePosition]="false"
+                [delay]="500"
+                placement="left">
+              <i class="fa fa-window-close my-1"></i>
+              <b class="ml-1 d-none d-sm-block">Excluir</b>
+            </button>
+          </legend>
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label>Nome</label>
+              <input
+              [ngClass]="cssValidator(lotes.get(i+'.nome'))"
+              type="text" class="form-control" formControlName="nome" placeholder="Lote">
+              <div class="invalid-feedback">
+                Nome é obrigatório.
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label>Quantidade</label>
+              <input
+              [ngClass]="cssValidator(lotes.get(i+'.quantidade'))"
+               type="number" class="form-control" formControlName="quantidade" placeholder="000">
+               <div class="invalid-feedback">
+                Quantidade é obrigatório.
+               </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label>Preço</label>
+              <input
+              [ngClass]="cssValidator(lotes.get(i+'.preco'))"
+               type="number" currencyMask class="form-control" formControlName="preco" placeholder="R$ 0,00">
+               <div class="invalid-feedback">
+                Preço é obrigatório.
+               </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label>Data Início</label>
+              <input
+              bsDatepicker
+              [bsConfig]="bsconfigLote"
+              type="datetime" class="form-control" formControlName="dataInicio" placeholder="01/01/2023">
+            </div>
+            <div class="form-group col-md-4">
+              <label>Data Fim</label>
+              <input
+              bsDatepicker
+              [bsConfig]="bsconfigLote"
+              type="datetime" class="form-control" formControlName="dataFim" placeholder="01/01/2023">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <button class="d-flex btn btn-outline-primary" (click)="adicionarLote()">
+    <i class="fa fa-plus-circle my-1"></i>
+    <b class="ml-1">Lote</b>
+  </button>
+</div>
+<div class="card-footer">
+  <div class="d-flex">
+    <button class="btn btn-outline-secondary mr-auto border">
+      Cancelar Alteração
+    </button>
+    <button class="btn btn-success" [disabled]="!form.controls.lotes.valid" (click)="salvarLotes()">
+      Salvar Lotes
+    </button>
+  </div>
+</div>
+</div>
+<br>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Deseja realmente deletar o {{this.loteAtual.nome}}?</p>
+    <button type="button" class="btn btn-default" (click)="confirmDeleteLote()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="declineDeleteLote()">Não</button>
+  </div>
+  </ng-template>
