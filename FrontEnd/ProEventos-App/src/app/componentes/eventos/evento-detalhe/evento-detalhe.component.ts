@@ -11,6 +11,7 @@ import { Evento } from 'src/app/models/Evento';
 import { Lote } from 'src/app/models/Lote';
 import { LoteService } from 'src/app/services/lote.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -27,24 +28,26 @@ export class EventoDetalheComponent implements OnInit {
   public estadoSalvar: string = 'post';
   public modalRef!: BsModalRef;
   public loteAtual = {id: 0, nome: '', indice: 0};
+  public imagemURL = 'assets/upload.png';
+  public file!: File;
 
   public get f(): any{
     return this.form.controls;
   }
 
-  public get bsconfigDate(): any {
+  public get bsConfig(): any {
     return {
       adaptivePosition: true,
-      dateInputFormat: 'MM/DD/YYYY hh:mm a',
+      dateInputFormat: 'DD/MM/YYYY hh:mm a',
       containerClass: 'theme-default',
       showWeekNumbers: false
     }
   }
 
-  public get bsconfigLote(): any {
+  public get bsConfigLote(): any {
     return {
       adaptivePosition: true,
-      dateInputFormat: 'MM/DD/YYYY',
+      dateInputFormat: 'DD/MM/YYYY',
       containerClass: 'theme-default',
       showWeekNumbers: false
     }
@@ -76,7 +79,7 @@ export class EventoDetalheComponent implements OnInit {
       qtdPessoas: ['', [Validators.required, Validators.max(120000)]],
       telefone: ['',[Validators.required ]],
       email: ['', [Validators.required, Validators.email ]],
-      imagemURL: ['',[Validators.required ]],
+      imagemURL: [''],
       lotes: this.fb.array([])
 
     });
@@ -91,7 +94,6 @@ export class EventoDetalheComponent implements OnInit {
   }
 
   public carregarEvento(): void {
-    debugger
     this.eventoId = Number(this.activatedrouter.snapshot.paramMap.get('id'));
 
     if(this.eventoId != null && this.eventoId != 0){
@@ -100,11 +102,18 @@ export class EventoDetalheComponent implements OnInit {
 
       this.eventoService.getEventoById(this.eventoId).subscribe({
         next: (eventoRetorno: Evento) => {
+          eventoRetorno.dataEvento = new Date(eventoRetorno.dataEvento || '');
           this.evento = {...eventoRetorno};
           this.form.patchValue(this.evento);
 
+          if(this.evento.imagemURL != ''){
+            this.imagemURL = environment.apiURL + 'resources/images/' + this.evento.imagemURL;
+          }
+
           //carregando lotes
           eventoRetorno.lotes.forEach(lote => {
+            lote.dataInicio = new Date(lote.dataInicio || '');
+            lote.dataFim = new Date(lote.dataFim || '');
             this.lotes.push(this.criarLote(lote));
           });
 
@@ -219,6 +228,34 @@ export class EventoDetalheComponent implements OnInit {
 
   public retornaTituloLote(nome: string): string {
     return nome == null || nome == '' ? 'Nome do lote' : nome
+  }
+
+  public onFileChange(img: any): void {
+    const reader = new FileReader();
+
+    this.file = img.target.files;
+    reader.readAsDataURL(this.file[0]);
+
+    reader.onload = (event: any) => this.imagemURL = event.target.result;
+
+    this.uploadImagem();
+  }
+
+  public uploadImagem() : void {
+    this.spinner.show();
+
+    this.eventoService.postUpload(this.eventoId, this.file).subscribe({
+      next: () => {
+        this.carregarEvento();
+        this.toastr.success('Imagem atualizada com sucesso!','Sucesso');
+      },
+      error: (error: any) => {
+        this.toastr.error('Erro ao fazer upload de imagem!', 'Erro');
+        console.error(error);
+      }
+
+    }).add(() => this.spinner.hide());
+
   }
 
 }

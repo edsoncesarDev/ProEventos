@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Evento } from '../models/Evento';
 
 @Injectable(
   //{ providedIn: 'root' } //adicionado no app.module.ts
 )
 export class EventoService {
-  public baseURL: string = 'https://localhost:44337/api/Eventos';
+  public baseURL: string =  environment.apiURL + 'api/Eventos';
 
   constructor(private http: HttpClient) { }
 
@@ -44,6 +45,17 @@ export class EventoService {
   public deleteEvento(id: number): Observable<any>{
     return this.http
       .delete<any>(`${this.baseURL}/${id}`)
+      .pipe(take(1));
+  }
+
+  public postUpload(eventoId: number, file: File): Observable<Evento>{
+
+    const fileToUpload = file[0] as File;
+    const formData = new FormData();
+    formData.append('file', fileToUpload);
+
+    return this.http
+      .post<Evento>(`${this.baseURL}/upload-image/${eventoId}`, formData)
       .pipe(take(1));
   }
 }

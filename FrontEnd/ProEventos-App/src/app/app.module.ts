@@ -10,6 +10,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown'; //importado
 import { ModalModule } from 'ngx-bootstrap/modal'; //importado
 import { ToastrModule } from 'ngx-toastr'; //importado
 import { NgxSpinnerModule } from "ngx-spinner"; //importado
+import { NgxCurrencyModule } from 'ngx-currency';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'; //importado
 import { defineLocale } from 'ngx-bootstrap/chronos'; //importado
@@ -79,6 +80,7 @@ defineLocale('pt-br', ptBrLocale); //importado - definindo datePicker como BR
       progressBar: true,
     }), //importado para mostrar alertas em nossos componentes
     NgxSpinnerModule,
+    NgxCurrencyModule
   ],
   providers: [
     EventoService,
