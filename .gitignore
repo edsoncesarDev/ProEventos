@@ -41,6 +41,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Build results
+# Build results backEnd
 Resources/
 Properties/
+appsettings.json
