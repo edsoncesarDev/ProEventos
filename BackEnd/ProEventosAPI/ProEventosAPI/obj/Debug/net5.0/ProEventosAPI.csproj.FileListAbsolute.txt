@@ -26,8 +26,6 @@ C:\Users\edson\Desktop\dev\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI
 C:\Users\edson\Desktop\dev\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\obj\Debug\net5.0\ProEventosAPI.pdb
 C:\Users\edson\Desktop\dev\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\obj\Debug\net5.0\ProEventosAPI.genruntimeconfig.cache
 C:\Users\edson\Desktop\dev\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\obj\Debug\net5.0\ref\ProEventosAPI.dll
-C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\bin\Debug\net5.0\appsettings.Development.json
-C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\bin\Debug\net5.0\appsettings.json
 C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\bin\Debug\net5.0\ProEventosAPI.exe
 C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\bin\Debug\net5.0\ProEventosAPI.deps.json
 C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\bin\Debug\net5.0\ProEventosAPI.runtimeconfig.json
@@ -101,3 +99,5 @@ C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProE
 C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
 C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
 C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\bin\Debug\net5.0\appsettings.json
