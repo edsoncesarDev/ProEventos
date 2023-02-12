@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -8,6 +8,7 @@ import { Evento } from '../models/Evento';
   //{ providedIn: 'root' } //adicionado no app.module.ts
 )
 export class EventoService {
+
   public baseURL: string =  environment.apiURL + 'api/Eventos';
 
   constructor(private http: HttpClient) { }

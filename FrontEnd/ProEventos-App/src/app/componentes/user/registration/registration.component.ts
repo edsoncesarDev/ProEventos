@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ValidatorField } from 'src/app/helpers/ValidatorField';
+import { User } from 'src/app/models/Identity/User';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-registration',
@@ -9,11 +13,16 @@ import { ValidatorField } from 'src/app/helpers/ValidatorField';
 })
 export class RegistrationComponent implements OnInit {
 
+  public user: User = {} as User;
+
   public form!: FormGroup;
   public get f(): any{
     return this.form.controls;
   }
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private accountService: AccountService,
+              private router: Router,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.validation();
@@ -22,7 +31,7 @@ export class RegistrationComponent implements OnInit {
   public validation(): void {
 
     const formOptions: AbstractControlOptions = {
-      validators: ValidatorField.MustMatch('senha', 'confirmarSenha')
+      validators: ValidatorField.MustMatch('password', 'confirmarPassword')
     };
 
     this.form = this.fb.group({
@@ -30,8 +39,8 @@ export class RegistrationComponent implements OnInit {
       ultimoNome: ['', [Validators.required]],
       email: ['',[Validators.required, Validators.email]],
       userName: ['',[Validators.required]],
-      senha: ['', [Validators.required, Validators.minLength(6)]],
-      confirmarSenha: ['', [Validators.required]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmarPassword: ['', [Validators.required]]
 
     }, formOptions);
   }
@@ -40,4 +49,16 @@ export class RegistrationComponent implements OnInit {
     return {'is-invalid': campoForm.errors && campoForm.touched};
   }
 
+  public register(): void {
+    this.user = { ...this.form.value};
+    this.accountService.register(this.user).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/dashboard');
+      },
+      error: (error: any) => {
+        console.error(error);
+        this.toastr.error(error.error);
+      }
+    })
+  }
 }

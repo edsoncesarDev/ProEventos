@@ -1,7 +1,7 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; //importando
-import { HttpClientModule } from '@angular/common/http'; //importando
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; //importando
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; //importando
 
 import { CollapseModule } from 'ngx-bootstrap/collapse'; //importado
@@ -30,9 +30,13 @@ import { EventoListaComponent } from './componentes/eventos/evento-lista/evento-
 import { UserComponent } from './componentes/user/user.component';
 import { LoginComponent } from './componentes/user/login/login.component';
 import { RegistrationComponent } from './componentes/user/registration/registration.component';
+import { HomeComponent } from './componentes/home/home.component';
 
+import { AccountService } from './services/account.service';
 import { EventoService } from './services/evento.service';
 import { LoteService } from './services/lote.service';
+
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
  //importado
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
@@ -59,6 +63,7 @@ defineLocale('pt-br', ptBrLocale); //importado - definindo datePicker como BR
     UserComponent,
     LoginComponent,
     RegistrationComponent,
+    HomeComponent
 
    ],
   imports: [
@@ -83,10 +88,11 @@ defineLocale('pt-br', ptBrLocale); //importado - definindo datePicker como BR
     NgxCurrencyModule
   ],
   providers: [
+    AccountService,
     EventoService,
-    LoteService
+    LoteService,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

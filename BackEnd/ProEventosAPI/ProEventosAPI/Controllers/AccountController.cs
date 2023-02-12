@@ -50,8 +50,13 @@ namespace ProEventosAPI.Controllers
                     return BadRequest("Usuário já existe");
 
                 var user = await _accountService.CreateAccountAsync(userDto);
-                if(user != null) return Ok(user);
-
+                if(user != null) 
+                    return Ok(new
+                    {
+                        userName = user.UserName,
+                        primeiroNome = user.PrimeiroNome,
+                        token = _tokenService.CreateToken(user).Result
+                    });
 
                 return BadRequest("Usuário não criado, tente novamente mais tarde!");
                 
@@ -73,7 +78,7 @@ namespace ProEventosAPI.Controllers
                 if (user == null) return Unauthorized("Usuário inválido");
 
                 var result = await _accountService.CheckUserPassowordAsync(user, userLogin.Password);
-                if (result == null) return Unauthorized("Usuário ou senha inválida");
+                if (!result.Succeeded) return Unauthorized("Usuário ou senha inválida");
 
                 return Ok(new
                 {
@@ -94,13 +99,21 @@ namespace ProEventosAPI.Controllers
         {
             try
             {
+                if (userUpdateDto.UserName != User.GetUserName())
+                    return Unauthorized("Usuário Inválido");
+
                 var user = await _accountService.GetUserByUserNameAsync(User.GetUserName());
                 if (user == null) return Unauthorized("Usuário inválido");
 
                 var userReturn = await _accountService.UpdateAccount(userUpdateDto);
                 if(userReturn == null) return NoContent();
 
-                return Ok(userReturn);
+                return Ok(new
+                {
+                    userName = userReturn.UserName,
+                    primeiroNome = userReturn.PrimeiroNome,
+                    token = _tokenService.CreateToken(userReturn).Result
+                });
 
             }
             catch (Exception ex)

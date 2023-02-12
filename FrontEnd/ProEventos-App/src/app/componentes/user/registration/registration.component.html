@@ -9,7 +9,7 @@
 
 	<div class="col-md-6">
 
-		<form class="p-1" [formGroup]="form">
+		<form class="p-1" [formGroup]="form" (ngSubmit)="register()">
       <div class="pb-2 d-block d-md-none">
         <h3 class="border-bottom">Cadastro de Usuário</h3>
       </div>
@@ -57,25 +57,25 @@
       <div class="form-row">
         <div class="form-group col-sm-6">
           <label for="">Senha:</label>
-          <input class="form-control" [ngClass]="cssValidator(f.senha)" type="password"
-          formControlName="senha"
+          <input class="form-control" [ngClass]="cssValidator(f.password)" type="password"
+          formControlName="password"
           placeholder="Digite uma Senha" />
-          <div *ngIf="f.senha.errors?.required && f.senha.touched" class="invalid-feedback">
+          <div *ngIf="f.password.errors?.required && f.password.touched" class="invalid-feedback">
             Senha é obrigatória.
           </div>
-          <div *ngIf="f.senha.errors?.minlength" class="invalid-feedback">
+          <div *ngIf="f.password.errors?.minlength && f.password.touched" class="invalid-feedback">
             Senha deve conter no mínimo 6 caracteres.
           </div>
         </div>
         <div class="form-group col-sm-6">
           <label for="">Confirmar Senha:</label>
-          <input class="form-control" [ngClass]="cssValidator(f.confirmarSenha)" type="password"
-          formControlName="confirmarSenha"
+          <input class="form-control" [ngClass]="cssValidator(f.confirmarPassword)" type="password"
+          formControlName="confirmarPassword"
           placeholder="Confirme a Senha" />
-          <div *ngIf="f.confirmarSenha.errors?.required" class="invalid-feedback">
+          <div *ngIf="f.confirmarPassword.errors?.required" class="invalid-feedback">
             Confirmar senha é obrigatório.
           </div>
-          <div *ngIf="f.confirmarSenha.errors?.mustMatch" class="invalid-feedback">
+          <div *ngIf="f.confirmarPassword.errors?.mustMatch" class="invalid-feedback">
             Repetir a senha é obrigatório.
           </div>
         </div>
@@ -88,7 +88,7 @@
       </div>
       <div class="form-row">
         <div class="form-group col-12">
-          <button class="btn btn-lg btn-success btn-block px-5" [disabled]="!form.valid">
+          <button class="btn btn-lg btn-success btn-block px-5"  type="submit" [disabled]="!form.valid">
             Registar
           </button>
         </div>
