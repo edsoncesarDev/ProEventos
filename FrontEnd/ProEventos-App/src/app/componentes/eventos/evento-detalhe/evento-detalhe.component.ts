@@ -237,7 +237,6 @@ export class EventoDetalheComponent implements OnInit {
     reader.readAsDataURL(this.file[0]);
 
     reader.onload = (event: any) => this.imagemURL = event.target.result;
-
     this.uploadImagem();
   }
 

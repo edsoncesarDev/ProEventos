@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; //importando
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; //importando
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; //importando
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { CollapseModule } from 'ngx-bootstrap/collapse'; //importado
-import { TooltipModule } from 'ngx-bootstrap/tooltip'; //importado
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown'; //importado
-import { ModalModule } from 'ngx-bootstrap/modal'; //importado
-import { ToastrModule } from 'ngx-toastr'; //importado
-import { NgxSpinnerModule } from "ngx-spinner"; //importado
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxCurrencyModule } from 'ngx-currency';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'; //importado
-import { defineLocale } from 'ngx-bootstrap/chronos'; //importado
-import { ptBrLocale } from 'ngx-bootstrap/locale'; //importado
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ptBrLocale } from 'ngx-bootstrap/locale';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -77,7 +78,8 @@ defineLocale('pt-br', ptBrLocale); //importado - definindo datePicker como BR
     TooltipModule.forRoot(), //importado para utilizar TooltipModule
     BsDropdownModule.forRoot(), //importado para utilizar BsDropdownModule - forRoot caso precise passar algum parâmetro
     ModalModule.forRoot(), //importado para utilizar ModalModule
-    BsDatepickerModule.forRoot(), //importado para funcionalidades de datas
+    BsDatepickerModule.forRoot(), //importado para a funcionalidades de datas
+    PaginationModule.forRoot(), //importado para a funcionalidade de paginação
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',

@@ -1,4 +1,5 @@
 ﻿using ProEventos.Application.Dtos;
+using ProEventos.Persistence.Pagination;
 using System.Threading.Tasks;
 
 namespace ProEventos.Application.IRepositoryApplication
@@ -9,8 +10,7 @@ namespace ProEventos.Application.IRepositoryApplication
         Task<EventoDto> UpdateEvento(int userId, int eventoId, EventoDto evento);
         Task<bool> DeleteEvento(int userId, int eventoId);
 
-        Task<EventoDto[]> GetAllEventosAsync(int userId, bool includePalestrantes = false);
-        Task<EventoDto[]> GetAllEventosByTemaAsync(int userId, string tema, bool includePalestrantes = false);
+        Task<PageList<EventoDto>> GetAllEventosAsync(int userId, PageParams pageParams, bool includePalestrantes = false);
         Task<EventoDto> GetEventoByIdAsync(int userId, int eventoId, bool includePalestrantes = false);
     }
 }

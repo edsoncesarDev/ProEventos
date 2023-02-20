@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { debounceTime, Subject } from 'rxjs';
 import { Evento } from 'src/app/models/Evento';
+import { PaginatedResult, Pagination } from 'src/app/models/Pagination';
 import { EventoService } from 'src/app/services/evento.service';
 import { environment } from 'src/environments/environment';
 
@@ -16,30 +18,39 @@ export class EventoListaComponent implements OnInit {
 
   modalRef!: BsModalRef;
   public eventos: Evento[] = [];
-  public eventosFiltrados: Evento[] = [];
   public eventoId:  number = 0;
+  public pagination = {} as Pagination;
 
   public widthImg: number = 150;
   public marginImg: number = 2;
   public showImg: boolean = true;
-  private _filtroLista: string = '';
 
-  public get filtroLista(): string{
-    return this._filtroLista;
-  }
+  public termoBuscaChanged: Subject<string> = new Subject<string>();
 
-  public set filtroLista(value: string){
-    this._filtroLista = value;
-    this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
-  }
+  public filtrarEventos(evt: any): void {
+    if(this.termoBuscaChanged.observers.length == 0){
 
-  public filtrarEventos(filtrarPor: string): Evento[] {
-    filtrarPor = filtrarPor.toLocaleLowerCase();
-    return this.eventos.filter(
-      ( evento: {tema: string; local: string;}) => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
-      evento.local.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+      this.termoBuscaChanged.pipe(debounceTime(1000)).subscribe(
+        filtrarPor => {
+          this.spinner.show();
+          this.eventoService.getEventos(
+            this.pagination.currentPage,
+            this.pagination.itemsPerPage,
+            filtrarPor
 
-    );
+          ).subscribe({
+            next: (paginatedResult: PaginatedResult<Evento[]>) => {
+              this.eventos = paginatedResult.result!;
+              this.pagination = paginatedResult.pagination;
+            },
+            error: () => {
+              this.toastr.error('Erro ao carregar os Eventos', 'Erro!');
+            }
+          }).add(() => this.spinner.hide());
+        }
+      )
+    }
+    this.termoBuscaChanged.next(evt.value);
   }
 
   constructor(
@@ -51,17 +62,21 @@ export class EventoListaComponent implements OnInit {
     ) { }
 
   public ngOnInit(): void {
+
+    this.pagination = {currentPage: 1, itemsPerPage: 3, totalItems: 1} as Pagination;
     this.carregarEventos()
-    this.spinner.show();
 
   }
 
   public carregarEventos(): void {
-    this.eventoService.getEventos().subscribe({
+    this.spinner.show();
 
-      next: (eventosResp: Evento[]) => {
-        this.eventos = eventosResp;
-        this.eventosFiltrados = this.eventos;
+    this.eventoService.getEventos(this.pagination.currentPage,
+                                  this.pagination.itemsPerPage).subscribe({
+
+      next: (paginatedResult: PaginatedResult<Evento[]>) => {
+        this.eventos = paginatedResult.result!;
+        this.pagination = paginatedResult.pagination;
       },
       error: (error: any) => {
         this.toastr.error('Erro ao carregar eventos.','Erro!')
@@ -75,6 +90,11 @@ export class EventoListaComponent implements OnInit {
     event.stopPropagation();
     this.eventoId = eventoId;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'})
+  }
+
+  public pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.carregarEventos();
   }
 
   public confirm(): void {
