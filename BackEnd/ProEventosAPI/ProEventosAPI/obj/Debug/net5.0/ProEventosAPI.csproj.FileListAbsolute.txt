@@ -107,3 +107,8 @@ C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProE
 C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\obj\Debug\net5.0\staticwebassets\ProEventosAPI.StaticWebAssets.Pack.cache
+C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\obj\Debug\net5.0\staticwebassets\msbuild.ProEventosAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\obj\Debug\net5.0\staticwebassets\msbuild.build.ProEventosAPI.props
+C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\obj\Debug\net5.0\staticwebassets\msbuild.buildMultiTargeting.ProEventosAPI.props
+C:\Users\edson\Desktop\dev\Projetos\ProEventosProjeto\BackEnd\ProEventosAPI\ProEventosAPI\obj\Debug\net5.0\staticwebassets\msbuild.buildTransitive.ProEventosAPI.props

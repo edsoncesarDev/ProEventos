@@ -1,12 +1,12 @@
 ﻿using ProEventos.Domain;
+using ProEventos.Persistence.Pagination;
 using System.Threading.Tasks;
 
 namespace ProEventos.Persistence.IRepository
 {
-    public interface IPalestrantePersist
+    public interface IPalestrantePersist : IGeralPersist
     {
-        Task<Palestrante[]> GetAllPalestrantesByNomeAsync(string nome, bool includeEventos = false);
-        Task<Palestrante[]> GetAllPalestrantesAsync(bool includeEventos = false);
-        Task<Palestrante> GetPalestranteByIdAsync(int palestranteId, bool includeEventos = false);
+        Task<PageList<Palestrante>> GetAllPalestrantesAsync(PageParams pageParams, bool includeEventos = false);
+        Task<Palestrante> GetPalestranteByUserIdAsync(int userId, bool includeEventos = false);
     }
 }

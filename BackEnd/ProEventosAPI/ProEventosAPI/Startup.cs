@@ -16,6 +16,8 @@ using ProEventos.Domain.Identity;
 using ProEventos.Persistence.Context;
 using ProEventos.Persistence.IRepository;
 using ProEventos.Persistence.Repository;
+using ProEventosAPI.Helpers.IUtilRepository;
+using ProEventosAPI.Helpers.UtilRepository;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -85,13 +87,17 @@ namespace ProEventosAPI
             services.AddScoped<ILoteService, LoteService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IPalestranteService, PalestranteService>();
+            services.AddScoped<IRedeSocialService, RedeSocialService>();
+            services.AddScoped<IUtil, Util>();
 
             services.AddScoped<IGeralPersist, GeralPersist>();
             services.AddScoped<IEventoPersist, EventoPersist>();
             services.AddScoped<ILotePersist, LotePersist>();
+            services.AddScoped<IPalestrantePersist, PalestrantePersist>();
+            services.AddScoped<IRedeSocialPersist, RedeSocialPersist>();
 
             services.AddScoped<IUserPersist, UserPersist>();
-
 
 
             services.AddCors();
