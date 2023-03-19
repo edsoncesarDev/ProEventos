@@ -12,6 +12,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxCurrencyModule } from 'ngx-currency';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -23,7 +24,10 @@ import { ContatosComponent } from './componentes/contatos/contatos.component';
 import { DashboardComponent } from './componentes/dashboard/dashboard.component';
 import { EventosComponent } from './componentes/eventos/eventos.component';
 import { PalestrantesComponent } from './componentes/palestrantes/palestrantes.component';
+import { PalestranteDetalheComponent } from './componentes/palestrantes/palestrante-detalhe/palestrante-detalhe.component';
+import { PalestranteListaComponent } from './componentes/palestrantes/palestrante-lista/palestrante-lista.component';
 import { PerfilComponent } from './componentes/user/perfil/perfil.component';
+import { PerfilDetalheComponent } from './componentes/user/perfil/perfil-detalhe/perfil-detalhe.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { TituloComponent } from './shared/titulo/titulo.component';
 import { EventoDetalheComponent } from './componentes/eventos/evento-detalhe/evento-detalhe.component';
@@ -32,6 +36,7 @@ import { UserComponent } from './componentes/user/user.component';
 import { LoginComponent } from './componentes/user/login/login.component';
 import { RegistrationComponent } from './componentes/user/registration/registration.component';
 import { HomeComponent } from './componentes/home/home.component';
+import { RedesSociaisComponent } from './componentes/redes-sociais/redes-sociais.component';
 
 import { AccountService } from './services/account.service';
 import { EventoService } from './services/evento.service';
@@ -41,6 +46,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
  //importado
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
+
 
 
 
@@ -57,6 +63,7 @@ defineLocale('pt-br', ptBrLocale); //importado - definindo datePicker como BR
     ContatosComponent,
     DashboardComponent,
     PerfilComponent,
+    PerfilDetalheComponent,
     TituloComponent,
     DateTimeFormatPipe, //declarando pipe criado para datas
     EventoDetalheComponent,
@@ -64,7 +71,11 @@ defineLocale('pt-br', ptBrLocale); //importado - definindo datePicker como BR
     UserComponent,
     LoginComponent,
     RegistrationComponent,
-    HomeComponent
+    HomeComponent,
+    PalestranteListaComponent,
+    PalestranteDetalheComponent,
+    RedesSociaisComponent,
+
 
    ],
   imports: [
@@ -80,6 +91,7 @@ defineLocale('pt-br', ptBrLocale); //importado - definindo datePicker como BR
     ModalModule.forRoot(), //importado para utilizar ModalModule
     BsDatepickerModule.forRoot(), //importado para a funcionalidades de datas
     PaginationModule.forRoot(), //importado para a funcionalidade de paginação
+    TabsModule.forRoot(), //importado para criar tabs dinâmicas
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',

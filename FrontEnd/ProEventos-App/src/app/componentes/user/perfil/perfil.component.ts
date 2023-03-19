@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { ValidatorField } from 'src/app/helpers/ValidatorField';
 import { UserUpdate } from 'src/app/models/Identity/UserUpdate';
 import { AccountService } from 'src/app/services/account.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-perfil',
@@ -14,97 +12,53 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class PerfilComponent implements OnInit {
 
-  public userUpdate: UserUpdate = {} as UserUpdate;
+  public usuario: UserUpdate = {} as UserUpdate;
 
-  public form!: FormGroup;
+  public imagemURL: string = '';
+  public file!: File;
 
-  public get f(): any{
-    return this.form.controls;
+  public get ehPalestrante(): boolean {
+    return this.usuario.funcao == 'Palestrante';
   }
 
   constructor(
-    private fb: FormBuilder,
-    private accountService: AccountService,
-    private router: Router,
+    private spinner: NgxSpinnerService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService
+    private accountService: AccountService
   ) { }
 
   ngOnInit() {
-    this.validation();
-    this.carregarUsuario();
   }
 
-  private carregarUsuario(): void {
+  public setFormValue(usuario: UserUpdate): void {
+    this.usuario = usuario;
+    if(this.usuario.imagemURL)
+      this.imagemURL = environment.apiURL + `resources/perfil/${this.usuario.imagemURL}`;
+    else
+      this.imagemURL = 'assets/perfil.png';
+  }
 
+  public onFileChange(ev: any): void {
+    const reader = new FileReader();
+
+    reader.onload = (event: any) => this.imagemURL = event.target.result;
+
+    this.file = ev.target.files;
+    reader.readAsDataURL(this.file[0]);
+
+    this.uploadImagem();
+  }
+
+  private uploadImagem(): void {
     this.spinner.show();
-
-    this.accountService.getUser().subscribe({
-      next:(userRetorno: UserUpdate) => {
-        console.log(userRetorno);
-        this.userUpdate = userRetorno;
-        this.form.patchValue(this.userUpdate);
-        this.toastr.success('Usuário carregado', 'Sucesso');
-
-      },
-      error:(error: any) => {
-        console.error(error.error);
-        this.toastr.error('Usuário não carregado', 'Erro');
-        this.router.navigate(['/dashboard']);
-
-      }
-    }).add(() => this.spinner.hide());
-  }
-
-  public validation(): void {
-
-    const formOptions: AbstractControlOptions = {
-      validators: ValidatorField.MustMatch('password', 'confirmarPassword')
-    };
-
-    this.form = this.fb.group({
-      userName: [''],
-      titulo: ['NaoInformado', [Validators.required]],
-      primeiroNome: ['', [Validators.required]],
-      ultimoNome: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', [Validators.required]],
-      funcao: ['NaoInformado', [Validators.required]],
-      descricao: ['', [Validators.required]],
-      password: ['', [Validators.nullValidator, Validators.minLength(6)]],
-      confirmarPassword: ['', [Validators.nullValidator]],
-    }, formOptions);
-  }
-
-  onSubmit(): void {
-    this.atualizarUsuario();
-
-  }
-
-  public atualizarUsuario(): void {
-    this.userUpdate = {...this.form.value};
-    this.spinner.show();
-
-    this.accountService.updateUser(this.userUpdate).subscribe({
+    this.accountService.postUpload(this.file).subscribe({
       next: () => {
-        this.toastr.success('Usuário atualizado!', 'Sucesso');
+        this.toastr.success('Imagem atualizada com sucesso','Sucesso!')
       },
       error: (error: any) => {
+        this.toastr.error('Erro ao fazer upload de imagem','Erro!');
         console.error(error);
-        this.toastr.error(error.error);
       }
     }).add(() => this.spinner.hide());
-
-
   }
-
-  public resetForm(event: any): void {
-    event.preventDefault();
-    this.form.reset();
-  }
-
-  public cssValidator(campoForm: FormControl): any {
-    return {'is-invalid': campoForm.errors && campoForm.touched};
-  }
-
 }
